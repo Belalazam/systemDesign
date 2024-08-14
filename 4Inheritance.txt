@@ -1,0 +1,56 @@
+inheritance -> it allows one class to inherit properties of another class
+
+
+why inheritance->
+code reusability, code can be extended easily, manitanice easy etc
+
+
+let see some syntax->
+
+class parent{
+    public:
+    void testParent()
+    {
+        cout<<"hi, i am parent";
+    }
+};
+
+class child: public parent{
+   public:
+    void testChild()
+    {
+        cout<<"hi, i am child";
+    }
+};
+
+there are few type of inheritance
+1) single
+A->B
+2) multiple 
+(A,B) -> C
+3) multilevel 
+A->B->C
+4) hirierchal
+A->(B, C)
+5) hybrid
+mixtiure of the abve types
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

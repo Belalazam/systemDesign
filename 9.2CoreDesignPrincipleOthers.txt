@@ -1,0 +1,242 @@
+SOLID principle
+
+1) Single Responsible Principle(SRP) ->
+	A Class should have Only one job or responsibility.
+
+
+wrong------------------------------------------->
+class Report {
+public:
+    void generateReport() {
+        // Generate report logic
+    }
+
+    void saveToFile() {
+        // Save report to a file
+    }
+};
+
+
+correct---------------------------------------->
+class Report {
+public:
+    void generateReport() {
+        // Generate report logic
+    }
+};
+
+class ReportSaver {
+public:
+    void saveToFile(Report& report) {
+        // Save report to a file
+    }
+};
+
+
+2) Open/Closed principle(OCP):
+	classes, modules, function etc. should be open for extension but closed for modification.
+
+
+wrong------------------------------------------->
+class Shape {
+public:
+    enum Type { CIRCLE, SQUARE };
+    Type type;
+};
+
+class AreaCalculator {
+public:
+    double calculateArea(Shape& shape) {
+        if (shape.type == Shape::CIRCLE) {
+            // Calculate area of circle
+        } else if (shape.type == Shape::SQUARE) {
+            // Calculate area of square
+        }
+        return 0;
+    }
+};
+
+
+correct---------------------------------------->
+class Shape {
+public:
+    virtual double calculateArea() const = 0;
+};
+
+class Circle : public Shape {
+public:
+    double calculateArea() const override {
+        // Calculate area of circle
+        return 0;
+    }
+};
+
+class Square : public Shape {
+public:
+    double calculateArea() const override {
+        // Calculate area of square
+        return 0;
+    }
+};
+
+class AreaCalculator {
+public:
+    double calculateArea(const Shape& shape) {
+        return shape.calculateArea();
+    }
+};
+
+
+
+3) Liskov Substitution Principle(LSP)
+	sub class or derived class can be used interchangebly with its based class without causing any errror
+
+
+wrong------------------------------------------->
+class Bird {
+public:
+    virtual void fly() = 0;
+};
+
+class Penguin : public Bird {
+public:
+    void fly() override {
+        // Penguins can't fly
+        throw std::logic_error("Penguins can't fly");
+    }
+};
+
+
+
+correct---------------------------------------->
+class Bird {
+public:
+    virtual void move() = 0;
+};
+
+class Sparrow : public Bird {
+public:
+    void move() override {
+        // Flying logic
+    }
+};
+
+class Penguin : public Bird {
+public:
+    void move() override {
+        // Walking logic
+    }
+};
+
+
+
+
+4) Interface Segregation Principle(ISP):
+	having smaller, more specific interfaces rather than a large, general-purpose one. It helps in reducing the impact of changes and avoids having clients implement methods they do not need
+
+
+wrong------------------------------------------->
+class IWorker {
+public:
+    virtual void work() = 0;
+    virtual void eat() = 0;
+};
+
+class Worker : public IWorker {
+public:
+    void work() override {
+        // Working logic
+    }
+
+    void eat() override {
+        // Eating logic
+    }
+};
+
+
+
+correct---------------------------------------->
+class IWorkable {
+public:
+    virtual void work() = 0;
+};
+
+class IEatable {
+public:
+    virtual void eat() = 0;
+};
+
+class Worker : public IWorkable, public IEatable {
+public:
+    void work() override {
+        // Working logic
+    }
+
+    void eat() override {
+        // Eating logic
+    }
+};
+
+
+
+
+
+
+
+5) Dependency Inversion Principle (DIP):
+	 High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+
+
+
+wrong------------------------------------------->
+class LightBulb {
+public:
+    void turnOn() {}
+    void turnOff() {}
+};
+
+class Switch {
+private:
+    LightBulb bulb;
+public:
+    void operate() {
+        // Turn on or off the bulb
+    }
+};
+
+
+correct---------------------------------------->
+class Switchable {
+public:
+    virtual void turnOn() = 0;
+    virtual void turnOff() = 0;
+};
+
+class LightBulb : public Switchable {
+public:
+    void turnOn() override {}
+    void turnOff() override {}
+};
+
+class Switch {
+private:
+    Switchable& device;
+public:
+    Switch(Switchable& dev) : device(dev) {}
+
+    void operate() {
+        // Turn on or off the device
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+	

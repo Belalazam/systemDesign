@@ -1,0 +1,51 @@
+lets Start with Class And Object
+
+anything which has four wheel , can carry more than 1 person and can commute between A place-> B place 
+we call it a car  
+
+and bmw, ferrari, buggati, maruti, suzuki are cars
+
+SO HERE bmw, ferrari, buggati, maruti, suzki are object, and class is car
+
+ferrari bmw, ferrari, buggati, maruti, suzki  is an Instance or example of car
+
+
+so by defination ->
+object are instance of the class
+class are blueprint for creating objects
+
+this is how class and object are represented in c++
+
+class Car{
+private:
+    int enginePower;
+    int comfortScore;  {these are called, attirbutes or memeber  variables}
+    int totalMielage;
+public:
+	
+	{this is called constructor}
+    Car(int comfortScore, int totalMielage, int enginePower){
+            this->comfortScore = comfortScore;
+            this->totalMielage = totalMielage;  
+            this->enginePower = enginePower;
+    }
+
+	
+	{these are called memeber function or methods}
+    int getComfortScore()
+    {
+        return comfortScore;
+    }
+
+    int  getTotalMielage()
+    {
+        return totalMielage;
+    }
+
+    int getEnginePower()
+    {
+        return  enginePower;
+    }
+};
+
+

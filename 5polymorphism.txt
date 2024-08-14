@@ -1,0 +1,131 @@
+polymorphism -> it allows object of diff class to be treated as object of common super class;
+
+
+let say we have function and there are chances that function can throw two type of objects
+
+
+{type} function name()
+{
+	if(case1)
+	{
+		throw obj1;
+	}
+	else 
+		throw obj2;
+
+}
+
+here in this case we can make obj1 and obj2 to be child of class parent;
+and we can simply replace "type" with 'parent'
+
+
+there are two type of polymorphims
+compile time-> function overloading
+runtime -> function overriding
+
+
+compile time polymorphims->
+
+lets say in our company web apps
+there are two type of user who want to login in our web app
+one is trying to enter through (email, password), and one is (userid, password)
+
+so 
+
+bool isAccessGranted(string email, string password)
+{
+	cout<<"access granted through email";
+	return true;
+}
+
+bool isAccessGranted(int userId, string password)
+{
+	cout<<"access granted through userid";
+	return true;
+}
+
+here in these cases, same function is called but just with diff parameter, one is (string, string) another is (int, string) -> this is called function overloading or compile time polymorphism;
+
+
+Runtime polymorphism->
+
+normal->
+class base{
+public:
+    void show()
+    {
+        cout<<"base";
+    }
+};
+class derived: public base{
+public:
+    void show()
+    {
+        cout<<"derived";
+    }
+};
+////////////////////////////////////////////////////
+void solution()
+{
+    base* baseptr;
+    derived der;
+    baseptr = &der;
+    baseptr->show();
+}
+
+virtual
+
+class base{
+public:
+    virtual void show()
+    {
+        cout<<"base";
+    }
+};
+class derived: public base{
+public:
+    void show()
+    {
+        cout<<"derived";
+    }
+};
+////////////////////////////////////////////////////
+void solution()
+{
+    base* baseptr;
+    derived der;
+    baseptr = &der;
+    baseptr->show();
+}
+
+class base{
+public:
+    virtual void show() = 0;
+  
+};
+class derived: public base{
+public:
+    void show() override
+    {
+        cout<<"derived";
+    }
+};
+////////////////////////////////////////////////////
+void solution()
+{
+    base* baseptr;
+    derived der;
+    baseptr = &der;
+    baseptr->show();
+}
+pure virtual function is also called java interface
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+arrow operator(->) :
+//////////////////////////////////////////////////////////////////////////////////////
+let say we created class
+
+class MyClass {
+public:
+    int value;
+    void display() {
+        std::cout << "Value: " << value << std::endl;
+    }
+};
+
+MyClass obj;
+obj.value = 10;
+
+now i will point a ponter to address of obj
+
+MyClass* ptr = &obj;
+
+now ptr is pointing to address of obj
+
+to get the value of ptr we do *(ptr)
+now we can use class functions using (*ptr).display()
+
+but to avoid writing this (*ptr).display()  we use arrow ptr->dispaly()
+///////////////////////////////////////////////////////////////////////////////////
+2 -> pointer or dereference operator(*)
+
+int value = 42;
+int* ptr = &value
+
+to the value of value
+we do *ptr;
+
+3-> double dereferecne operator(**)
+    int value = 42;
+    int* ptr1 = &value;
+    int** ptr2 = &ptr1;
+
+    std::cout << "Value: " << value << std::endl;
+    std::cout << "Pointer 1 points to: " << *ptr1 << std::endl;
+    std::cout << "Pointer 2 points to: " << **ptr2 << std::endl;
+
+    ptr2 -> ptr1 -> value
+    to get the value of value from ptr2 we do **ptr2
+
+
+4-> address of the value(&)
+	it simply give the memory address of the variable
+
+
+
+

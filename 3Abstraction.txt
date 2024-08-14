@@ -1,0 +1,52 @@
+what is abstraction?
+data hiding is called abstraction
+
+
+let say in our company ("helping truth")
+we hired some intern, and those intern has very little knowledge.
+
+they said they have some names, and wanted to know whether these name have been ever helped
+and what is the total money they are helped with. 
+
+so lets help them
+
+
+
+class HelpedInformation{
+    public:
+        int getTotalAmountHelped(string name)
+        {
+             if(name == "suresh")
+             {
+                return 100;
+             }
+             else if(name == "david")
+             {
+                return 400;
+             }
+             return -1;
+        }
+
+        int getNumberOfPeopleHelped(string name)
+        {
+            if(name == "suresh")
+             {
+                return 3;
+             }
+             else if(name == "david")
+             {
+                return 8;
+             }
+             return -1;
+        }
+};
+////////////////////////////////////////////////////
+void solution()
+{
+    HelpedInformation helpedInformation;
+    cout<<helpedInformation.getTotalAmountHelped("suresh")<<"\n";
+    cout<<helpedInformation.getNumberOfPeopleHelped("david");
+}
+
+here you can see user is not interested in what happend in helpedINformation class, 
+we just given him manual, call this function of my class ,pass name string and get your ans 

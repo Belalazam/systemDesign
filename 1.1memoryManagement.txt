@@ -1,0 +1,26 @@
+there are two ways object of a class can be created
+
+1) stack memory
+2) heap memory
+
+stack memory is static memory allocation -> its created compile-time and manged by compiler during run-time
+whereas
+heap memory is dynamic memory allocation -> its allocated during run-time and should be managed by programmer itself
+
+
+diff
+1) 
+stack memory can be called only in scope
+heap memory can be called anywhere in the programm
+
+2) 
+stack memory is managed by compiler
+heap memory is managed by programmer
+
+//creation
+stack memory way to create object
+Myclass obj;
+
+heap memory way to create object
+Myclass* obj = new Myclass();
+delete obj; // freed the allocated memory

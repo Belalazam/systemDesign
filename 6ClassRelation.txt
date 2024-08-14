@@ -1,0 +1,18 @@
+Association->	No ownership  -> Classes can exits independently
+
+Aggregation->	ownership    -> classes can exits independently 
+
+Composition-> strict ownership -> cannot extis independently
+
+Teacher 
+
+
+Assocation
+Car -> passenger
+ 
+Aggregation
+Car -> driver
+
+
+Compostion
+Car -> engine

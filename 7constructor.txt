@@ -1,0 +1,56 @@
+Constructos
+
+1) default
+2) paremeterized 
+3) copy
+4) this keyword (for getting current object addr, or context of the object)
+
+
+class Greet{
+
+public:
+    string greet;
+    string name;
+    Greet()
+    {
+        //do nothing
+        cout<<"Greet default constructor called";
+    }
+
+    Greet(string message)
+    {
+        greet = message;
+    }
+
+    Greet(string greet, string name)
+    {
+        this->greet = greet;
+        this->name = name;
+    }
+
+    void printGreet()
+    {
+        cout<<greet<<"\n";
+        cout<<name<<"\n";
+    }
+
+};
+////////////////////////////////////////////////////
+void solution()
+{
+    //default
+    Greet greet;
+    greet.printGreet();
+
+    //paramter
+    Greet greet1("hello");
+    greet1.printGreet();
+
+    //this->
+    Greet greet2("hello", "ramesh");
+    greet2.printGreet();
+
+    //copy
+    Greet greet3(greet2);
+    greet3.printGreet();
+}

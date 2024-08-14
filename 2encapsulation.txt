@@ -1,0 +1,39 @@
+same as medicine capsule, a outer coverting and then inside medicine
+
+what is encapsulation->
+practice of buning data into single unit
+
+a class is an example of encapsulation->
+memeber variables + member function = class (single unit)
+
+lets talk about data hiding
+
+we have 3 access specifier-> 
+
+public -> when you define something public, its for every one
+everyone means->  (same class true), (derived class true), (outside class true)
+
+
+protected  ->     (same class true), (derived class true), (outside class false)
+
+protected  ->     (same class true), (derived class false), (outside class false)
+
+
+
+let say in our company which is again ("helping truth")
+
+we have a web app for our company
+in that web app
+we have (database file), (utils file), (database file for friend) 
+in database file  we have code which matches and save username and password
+while in (util file) we have some logic, like name should not have special char etc
+
+we will choose datbase file to be private , cause its confidentials
+and util file to be public, so that everyone can user
+we will choose (database file for friend) to be protected , which is derived class from database file)
+
+
+
+when hacker comes and try to run script in out code, he can only access util file, which will not give us any damage
+
+
