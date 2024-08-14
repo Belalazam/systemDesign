@@ -1,0 +1,178 @@
+GRASP:	(General Responsibility Assignment Software Patterns)
+
+
+1) information expert ->
+	Assign responsibility to the class that has the necessary information to fulfill the responsibility.
+
+class Order {
+public:
+    double calculateTotal() const {
+        // Calculate total using order details
+    }
+};
+Here, Order is responsible for calculating its total because it has all the relevant information
+
+
+
+2) Creator -> 
+	Assign the responsibility of creating instances of a class to another class that has the necessary information or context to create those instances.
+	
+class Invoice {
+public:
+    Invoice(Order& order) : order(order) {}
+private:
+    Order& order;
+};
+
+class Order {
+public:
+    Invoice createInvoice() {
+        return Invoice(*this);
+    }
+private:
+    // Order details
+};
+Here, Order is responsible for creating Invoice because it holds the context required.
+
+
+3) Controller
+	Assign the responsibility for handling system events to a controller class. The controller is responsible for coordinating the system’s response to an event.
+
+class OrderController {
+public:
+    void placeOrder(Order& order) {
+        // Handle order placement logic
+    }
+};
+Here, OrderController manages the process of placing an order.
+
+
+4) Low Coupling ->
+	Design classes to minimize dependencies on other classes. Classes should be loosely coupled, meaning changes in one class should have minimal impact on others.
+
+class Invoice {
+public:
+    void generate() {
+        // Generate invoice
+    }
+};
+
+class Report {
+private:
+    Invoice& invoice;
+public:
+    Report(Invoice& inv) : invoice(inv) {}
+    void createReport() {
+        invoice.generate(); // Low coupling
+    }
+};
+Here, Report depends on Invoice but only through a minimal interface, promoting low coupling.
+	
+
+
+5) High Cohesion ->
+	Definition: Design classes so that their responsibilities are closely related and focused on a single purpose or functionality.
+
+class Customer {
+public:
+    void updateAddress(const std::string& newAddress) {
+        address = newAddress;
+    }
+    
+    std::string getAddress() const {
+        return address;
+    }
+private:
+    std::string address;
+};
+Here, Customer focuses solely on managing customer information, demonstrating high cohesion.
+
+
+6)  Polymorphism
+	Definition: Use polymorphism to handle different types of objects through a common interface. This allows for interchangeable objects and enhances flexibility.
+
+
+class Shape {
+public:
+    virtual double area() const = 0;
+};
+
+class Circle : public Shape {
+public:
+    double area() const override {
+        // Calculate area of the circle
+    }
+};
+
+class Square : public Shape {
+public:
+    double area() const override {
+        // Calculate area of the square
+    }
+};
+
+7) pure fabrication -> 
+	This principle is used when there is no natural class to handle a responsibility, so a new class is created to fulfill that role.
+
+class LogManager {
+public:
+    void log(const std::string& message) {
+        // Log message to a file or console
+    }
+};
+Here, LogManager is a pure fabrication class created to handle logging functionality.
+
+
+8) Indirection
+	Use an intermediate object to mediate between other components or services to reduce direct dependencies.
+
+class Database {
+public:
+    void query(const std::string& sql) {
+        // Execute SQL query
+    }
+};
+
+class DataAccess {
+private:
+    Database& db;
+public:
+    DataAccess(Database& database) : db(database) {}
+    void fetchData(const std::string& sql) {
+        db.query(sql);
+    }
+};
+Here, DataAccess acts as an intermediary between the client code and Database.
+
+
+9) Protected Variations:
+	Design systems so that variations in behavior are protected from the rest of the system. This typically involves using abstractions and interfaces.
+
+class PaymentMethod {
+public:
+    virtual void processPayment(double amount) = 0;
+};
+
+class CreditCard : public PaymentMethod {
+public:
+    void processPayment(double amount) override {
+        // Process credit card payment
+    }
+};
+
+class PayPal : public PaymentMethod {
+public:
+    void processPayment(double amount) override {
+        // Process PayPal payment
+    }
+};
+
+	
+
+	
+	
+	
+
+
+	
+

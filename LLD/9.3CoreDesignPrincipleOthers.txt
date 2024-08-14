@@ -1,0 +1,7 @@
+DRY (dont repeat yourself) ->
+
+Principle: Avoid code duplication by abstracting common functionality into reusable components. This reduces redundancy and improves maintainability.
+
+
+KISS (keep it simple, stupid) ->
+	Design systems in a way that is simple and easy to understand. Avoid unnecessary complexity.
