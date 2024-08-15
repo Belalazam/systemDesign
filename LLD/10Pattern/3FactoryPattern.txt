@@ -1,0 +1,86 @@
+The Factory Pattern is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. It's commonly used when the exact type of object to create depends on some condition at runtime.
+
+public interface Vehicle {
+    void drive();
+}
+
+
+public class Car implements Vehicle {
+    @Override
+    public void drive() {
+        System.out.println("Driving a car");
+    }
+}
+
+public class Bike implements Vehicle {
+    @Override
+    public void drive() {
+        System.out.println("Riding a bike");
+    }
+}
+
+public class Truck implements Vehicle {
+    @Override
+    public void drive() {
+        System.out.println("Driving a truck");
+    }
+}
+
+
+public class VehicleFactory {
+    // Factory method to create a Vehicle
+    public Vehicle createVehicle(String type) {
+        if (type == null) {
+            return null;
+        }
+        switch (type.toLowerCase()) {
+            case "car":
+                return new Car();
+            case "bike":
+                return new Bike();
+            case "truck":
+                return new Truck();
+            default:
+                throw new IllegalArgumentException("Unknown vehicle type: " + type);
+        }
+    }
+}
+
+
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        VehicleFactory vehicleFactory = new VehicleFactory();
+
+        Vehicle vehicle1 = vehicleFactory.createVehicle("car");
+        vehicle1.drive();  // Output: Driving a car
+
+        Vehicle vehicle2 = vehicleFactory.createVehicle("bike");
+        vehicle2.drive();  // Output: Riding a bike
+
+        Vehicle vehicle3 = vehicleFactory.createVehicle("truck");
+        vehicle3.drive();  // Output: Driving a truck
+    }
+}
+
+
+
+
+
+
+
+The Factory Pattern is about creating the right object at runtime based on a given input or condition
+
+
+Abstract Factory Pattern -> we hide the Object creation logic, while implementing factory pattern
+
+
+						client
+					   Abstact Factory
+		(Indian car factory)          			(us car factory)
+	(us luxury car)    (us mini car) 		(indian luxary car)         (indian mini car)
+  
+
+

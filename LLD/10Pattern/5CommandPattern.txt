@@ -1,0 +1,149 @@
+The Command Pattern is a behavioral design pattern that encapsulates a request as an object, thereby allowing you to parameterize clients with queues, requests, and operations. It also provides support for undoable operations. This pattern decouples the sender of a request from the receiver, allowing for more flexible command handling.
+
+
+
+Benefits of the Command Pattern:
+Decoupling: Separates the sender of a request from the receiver, allowing for flexible and reusable code.
+Undo/Redo Operations: Commands can be stored, allowing for easy implementation of undo/redo functionality.
+Dynamic Command Composition: Commands can be combined into composite commands or executed in sequence.
+
+
+
+The Command Pattern introduces an intermediary, or "mediator," between the requester and the actual logic that performs the action
+
+
+
+Step 1: Define a Command Interface
+Create an interface that declares an execute method for performing the action.
+
+public interface Command {
+    void execute();
+}
+Step 2: Create Concrete Command Classes
+Implement concrete command classes for each action (e.g., turning on and off a light or fan).
+
+// Command to turn on the light
+public class LightOnCommand implements Command {
+    private Light light;
+
+    public LightOnCommand(Light light) {
+        this.light = light;
+    }
+
+    @Override
+    public void execute() {
+        light.turnOn();
+    }
+}
+
+// Command to turn off the light
+public class LightOffCommand implements Command {
+    private Light light;
+
+    public LightOffCommand(Light light) {
+        this.light = light;
+    }
+
+    @Override
+    public void execute() {
+        light.turnOff();
+    }
+}
+
+// Command to turn on the fan
+public class FanOnCommand implements Command {
+    private Fan fan;
+
+    public FanOnCommand(Fan fan) {
+        this.fan = fan;
+    }
+
+    @Override
+    public void execute() {
+        fan.turnOn();
+    }
+}
+
+// Command to turn off the fan
+public class FanOffCommand implements Command {
+    private Fan fan;
+
+    public FanOffCommand(Fan fan) {
+        this.fan = fan;
+    }
+
+    @Override
+    public void execute() {
+        fan.turnOff();
+    }
+}
+Step 3: Create Receiver Classes
+Define the classes that will perform the actual actions (e.g., Light and Fan).
+
+public class Light {
+    public void turnOn() {
+        System.out.println("Light is ON");
+    }
+
+    public void turnOff() {
+        System.out.println("Light is OFF");
+    }
+}
+
+public class Fan {
+    public void turnOn() {
+        System.out.println("Fan is ON");
+    }
+
+    public void turnOff() {
+        System.out.println("Fan is OFF");
+    }
+}
+Step 4: Create an Invoker Class
+Create a class that holds and executes the command.
+
+public class RemoteControl {
+    private Command command;
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public void pressButton() {
+        command.execute();
+    }
+}
+Step 5: Use the Command Pattern
+Here's how you can use the Command Pattern to operate the devices using the remote control:
+
+public class Main {
+    public static void main(String[] args) {
+        Light light = new Light();
+        Fan fan = new Fan();
+
+        Command lightOn = new LightOnCommand(light);
+        Command lightOff = new LightOffCommand(light);
+        Command fanOn = new FanOnCommand(fan);
+        Command fanOff = new FanOffCommand(fan);
+
+        RemoteControl remote = new RemoteControl();
+
+        // Turn on the light
+        remote.setCommand(lightOn);
+        remote.pressButton(); // Output: Light is ON
+
+        // Turn off the light
+        remote.setCommand(lightOff);
+        remote.pressButton(); // Output: Light is OFF
+
+        // Turn on the fan
+        remote.setCommand(fanOn);
+        remote.pressButton(); // Output: Fan is ON
+
+        // Turn off the fan
+        remote.setCommand(fanOff);
+        remote.pressButton(); // Output: Fan is OFF
+    }
+}
+
+

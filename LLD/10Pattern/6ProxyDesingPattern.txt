@@ -1,0 +1,86 @@
+The Proxy Design Pattern is a structural design pattern that provides an intermediary or placeholder object to control access to another object. This intermediary, called the proxy, can perform additional operations like lazy loading, access control, logging, or caching before or after delegating requests to the real object.
+
+
+
+
+Step 1: Create a Subject Interface
+Define an interface that both the real object and the proxy will implement.
+
+
+public interface Image {
+    void display();
+}
+Step 2: Create the Real Object
+Implement the real object that performs the actual work (e.g., loading and displaying an image).
+
+
+public class RealImage implements Image {
+    private String filename;
+
+    public RealImage(String filename) {
+        this.filename = filename;
+        loadImageFromDisk();
+    }
+
+    private void loadImageFromDisk() {
+        System.out.println("Loading " + filename);
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Displaying " + filename);
+    }
+}
+Step 3: Create the Proxy
+Implement a proxy class that controls access to the real object. It can add additional functionality like lazy loading.
+
+
+public class ProxyImage implements Image {
+    private RealImage realImage;
+    private String filename;
+
+    public ProxyImage(String filename) {
+        this.filename = filename;
+    }
+
+    @Override
+    public void display() {
+        if (realImage == null) {
+            realImage = new RealImage(filename);
+        }
+        realImage.display();
+    }
+}
+Step 4: Use the Proxy
+Here's how you can use the proxy to handle image display:
+
+
+public class Main {
+    public static void main(String[] args) {
+        Image image1 = new ProxyImage("image1.jpg");
+        Image image2 = new ProxyImage("image2.jpg");
+
+        // Image will be loaded and displayed only when needed
+        image1.display(); // Output: Loading image1.jpg
+                          //         Displaying image1.jpg
+
+        image2.display(); // Output: Loading image2.jpg
+                          //         Displaying image2.jpg
+
+        // Image is already loaded, no need to load again
+        image1.display(); // Output: Displaying image1.jpg
+    }
+}
+
+
+the proxy acts as a mediator that decides how to handle requests to the real object. Here's a summary of the mediator's roles in the Proxy Pattern:
+
+Access Control: The proxy can enforce access restrictions or permissions before forwarding the request to the real object. For example, it might check if a user has the right to access a certain resource.
+
+Lazy Loading: The proxy can delay the creation and initialization of the real object until it is actually needed. This is useful for optimizing resource usage and performance.
+
+Caching: The proxy can cache results of expensive operations to avoid repeated calculations or data fetches. This can improve performance by reducing the load on the real object.
+
+Logging and Monitoring: The proxy can add logging or monitoring features to track usage, performance, or other metrics related to the real object.
+
+Error Handling: The proxy can handle errors or exceptions that occur during the interaction with the real object. It can provide fallback mechanisms or error messages.

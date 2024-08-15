@@ -1,0 +1,47 @@
+The Singleton Pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to that instance. This is useful when exactly one object is needed to coordinate actions across the system.
+
+
+
+public class Logger {
+    // Step 2: Create a private static variable to hold the single instance
+    private static Logger instance;
+
+    // Step 3: Make the constructor private to prevent instantiation
+    private Logger() {
+        // Initialize the logger, e.g., open a file for writing
+        System.out.println("Logger initialized");
+    }
+
+    // Step 4: Provide a public static method to get the single instance
+    public static Logger getInstance() {
+        if (instance == null) {
+            instance = new Logger();
+        }
+        return instance;
+    }
+
+    // Method to log messages
+    public void log(String message) {
+        System.out.println("Log: " + message);
+        // Actual logging logic (e.g., write to a file) would go here
+    }
+}
+
+
+
+public class Main {
+    public static void main(String[] args) {
+        // Get the single instance of Logger
+        Logger logger1 = Logger.getInstance();
+        logger1.log("This is the first log message.");
+
+        // Get the same instance of Logger again
+        Logger logger2 = Logger.getInstance();
+        logger2.log("This is the second log message.");
+
+        // Verify that logger1 and logger2 are the same instance
+        System.out.println(logger1 == logger2); // Output: true
+    }
+}
+
+
