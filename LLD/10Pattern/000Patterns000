@@ -1,0 +1,58 @@
+Structural Design Patterns:
+
+Composite Design Pattern (12compositeDesignPattern.txt)
+Proxy Design Pattern (6ProxyDesingPattern.txt)
+Bridge Design Pattern (7BridgePattern.txt)
+Decorator Design Pattern (8DecoratorPattern.txt)
+Adapter Design Pattern (9AdapterDesingPattern.txt)
+Facade Design Pattern (10FacadeDesingPattern.txt)
+
+Behavioral Design Patterns:
+
+Strategy Design Pattern (1StrategyDesignPattern.txt)
+Observer Design Pattern (2ObserverPattern.txt)
+Command Design Pattern (5CommandPattern.txt)
+Template Design Pattern (13templateDesingPattern.txt)
+Iterator Design Pattern (14IteratorDesingPattern.txt)
+
+Creational Design Patterns:
+
+Factory Pattern (3FactoryPattern.txt)
+Abstract Factory Pattern (11AbstractDesingPattern)
+Singleton Pattern (4singleton.txt)
+This should help you understand which design patterns belong to which category.
+
+
+Design patterns are categorized into three main types: structural, behavioral, and creational. Each type serves a different purpose in software design and architecture. Here's what each one means:
+
+1. Structural Design Patterns:
+Purpose: These patterns deal with the composition of classes or objects. They help in designing the structure of a system by ensuring that if one part of a system changes, the entire system doesn’t need to change.
+
+Characteristics:
+
+Focus on how objects and classes are composed to form larger structures.
+Facilitate the creation of complex structures by assembling objects and classes in different configurations.
+Examples include Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy.
+Example: The Facade Design Pattern provides a simplified interface to a complex subsystem, making it easier to use.
+
+2. Behavioral Design Patterns:
+Purpose: These patterns are concerned with algorithms and the assignment of responsibilities between objects. They focus on how objects interact and how responsibilities are shared among them.
+
+Characteristics:
+
+Deal with the communication between objects.
+Help in defining how objects interact in terms of roles and responsibilities.
+Examples include Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, and Visitor.
+Example: The Observer Design Pattern allows an object to notify other objects about changes in its state, which is useful for implementing distributed event-handling systems.
+
+3. Creational Design Patterns:
+Purpose: These patterns focus on the creation of objects. They abstract the instantiation process and make the system independent of how its objects are created, composed, and represented.
+
+Characteristics:
+
+Encapsulate the logic of object creation.
+Provide flexibility in what gets created, who creates it, and how.
+Examples include Factory Method, Abstract Factory, Builder, Prototype, and Singleton.
+Example: The Factory Method Pattern defines an interface for creating an object, but allows subclasses to alter the type of objects that will be created.
+
+These three types of design patterns help in building scalable, maintainable, and reusable software systems by addressing different aspects of software architecture.
