@@ -1,0 +1,82 @@
+The Facade Design Pattern simplifies interactions with complex systems by providing a unified interface. In the context of ordering food through apps like Zomato or Swiggy, the app acts as a facade, hiding the complexities of dealing with multiple restaurants, payment gateways, delivery services, etc.
+
+Concept
+When you use an app like Zomato or Swiggy, you don’t have to interact with each restaurant, payment gateway, or delivery service directly. Instead, you just use the app, which internally manages everything. This simplifies the process for you, the user, by providing a single interface to interact with.
+
+Java Example: Food Ordering System
+Let's simulate a food ordering system with a facade pattern.
+
+1. Subsystem Components
+First, let's define the components of the system that handle different parts of the food ordering process.
+
+a) Restaurant
+
+class Restaurant {
+    public void findRestaurant(String foodItem) {
+        System.out.println("Finding restaurant for " + foodItem);
+    }
+
+    public void placeOrder(String foodItem) {
+        System.out.println("Order placed for " + foodItem);
+    }
+}
+b) Payment Gateway
+
+class PaymentGateway {
+    public void makePayment(double amount) {
+        System.out.println("Payment of Rs " + amount + " made successfully");
+    }
+}
+c) Delivery Service
+
+class DeliveryService {
+    public void scheduleDelivery(String foodItem) {
+        System.out.println("Delivery scheduled for " + foodItem);
+    }
+
+    public void deliverFood(String foodItem) {
+        System.out.println(foodItem + " delivered to your address");
+    }
+}
+2. Facade Class (FoodOrderFacade)
+Now, let's create the facade that simplifies interaction with these components.
+
+
+class FoodOrderFacade {
+    private Restaurant restaurant;
+    private PaymentGateway paymentGateway;
+    private DeliveryService deliveryService;
+
+    public FoodOrderFacade() {
+        this.restaurant = new Restaurant();
+        this.paymentGateway = new PaymentGateway();
+        this.deliveryService = new DeliveryService();
+    }
+
+    public void orderFood(String foodItem, double amount) {
+        restaurant.findRestaurant(foodItem);
+        restaurant.placeOrder(foodItem);
+        paymentGateway.makePayment(amount);
+        deliveryService.scheduleDelivery(foodItem);
+        deliveryService.deliverFood(foodItem);
+    }
+}
+3. Client Code
+Finally, let's use the facade to order food.
+
+java
+Copy code
+public class FacadePatternDemo {
+    public static void main(String[] args) {
+        FoodOrderFacade foodOrder = new FoodOrderFacade();
+        foodOrder.orderFood("Pizza", 500.0);
+    }
+}
+Output
+css
+Copy code
+Finding restaurant for Pizza
+Order placed for Pizza
+Payment of Rs 500.0 made successfully
+Delivery scheduled for Pizza
+Pizza delivered to your address

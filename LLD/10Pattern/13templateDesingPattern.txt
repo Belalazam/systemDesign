@@ -1,0 +1,89 @@
+The Template Design Pattern is a behavioral design pattern that defines the structure of an algorithm in a base class but lets subclasses override specific steps of the algorithm without changing its overall structure.
+
+Think of it like a cooking recipe. The recipe defines the general steps for preparing a dish, but you can customize some ingredients or steps based on your taste.
+
+Here’s a simple example in Java to illustrate the Template Design Pattern:
+
+Create an Abstract Base Class: This class contains the template method with the algorithm’s skeleton.
+
+Define Concrete Subclasses: These subclasses override the specific steps of the algorithm.
+
+Example
+Let’s say we’re making a simple process for making different types of beverages.
+
+Abstract Base Class:
+
+
+abstract class Beverage {
+    // Template method
+    public final void makeBeverage() {
+        boilWater();
+        brew();
+        pourInCup();
+        addCondiments();
+    }
+
+    // Steps that are common to all beverages
+    private void boilWater() {
+        System.out.println("Boiling water");
+    }
+
+    private void pourInCup() {
+        System.out.println("Pouring into cup");
+    }
+
+    // Steps to be implemented by subclasses
+    protected abstract void brew();
+    protected abstract void addCondiments();
+}
+Concrete Subclass for Coffee:
+
+class Coffee extends Beverage {
+    @Override
+    protected void brew() {
+        System.out.println("Dripping coffee through filter");
+    }
+
+    @Override
+    protected void addCondiments() {
+        System.out.println("Adding sugar and milk");
+    }
+}
+Concrete Subclass for Tea:
+
+
+class Tea extends Beverage {
+    @Override
+    protected void brew() {
+        System.out.println("Steeping the tea");
+    }
+
+    @Override
+    protected void addCondiments() {
+        System.out.println("Adding lemon");
+    }
+}
+Usage:
+
+public class Main {
+    public static void main(String[] args) {
+        Beverage coffee = new Coffee();
+        coffee.makeBeverage();
+
+        System.out.println();
+
+        Beverage tea = new Tea();
+        tea.makeBeverage();
+    }
+}
+Output
+
+Boiling water
+Dripping coffee through filter
+Pouring into cup
+Adding sugar and milk
+
+Boiling water
+Steeping the tea
+Pouring into cup
+Adding lemon

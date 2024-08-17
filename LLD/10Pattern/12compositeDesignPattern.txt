@@ -1,0 +1,84 @@
+The Composite Pattern is a structural design pattern that allows you to compose objects into tree-like structures to represent part-whole hierarchies. It lets clients treat individual objects and compositions of objects uniformly.
+
+Here’s a simple Java example to illustrate the Composite Pattern:
+
+Scenario
+Imagine you’re designing a graphical drawing application. You have basic shapes like Circle and Rectangle, but you also want to create complex shapes by grouping these basic shapes together. The Composite Pattern will help you manage both simple and composite shapes uniformly.
+
+Components of the Composite Pattern
+Component: This is an abstract class or interface that defines the common interface for all concrete objects and their compositions.
+
+Leaf: This represents the end objects of a composition. In this case, it would be Circle and Rectangle.
+
+Composite: This represents a group of Leaf objects. It implements the same interface as the Leaf but can also hold a collection of Leaf objects or other Composite objects.
+
+Example ->
+
+import java.util.ArrayList;
+import java.util.List;
+
+// Component
+interface Shape {
+    void draw();
+}
+
+// Leaf
+class Circle implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing Circle");
+    }
+}
+
+// Leaf
+class Rectangle implements Shape {
+    @Override
+    public void draw() {
+        System.out.println("Drawing Rectangle");
+    }
+}
+
+// Composite
+class CompositeShape implements Shape {
+    private List<Shape> shapes = new ArrayList<>();
+
+    public void addShape(Shape shape) {
+        shapes.add(shape);
+    }
+
+    public void removeShape(Shape shape) {
+        shapes.remove(shape);
+    }
+
+    @Override
+    public void draw() {
+        System.out.println("Drawing Composite Shape:");
+        for (Shape shape : shapes) {
+            shape.draw();
+        }
+    }
+}
+
+// Client code
+public class CompositePatternDemo {
+    public static void main(String[] args) {
+        // Create individual shapes
+        Shape circle = new Circle();
+        Shape rectangle = new Rectangle();
+
+        // Create a composite shape and add individual shapes to it
+        CompositeShape composite = new CompositeShape();
+        composite.addShape(circle);
+        composite.addShape(rectangle);
+
+        // Draw the composite shape
+        composite.draw();
+    }
+}
+Explanation
+Shape: This is the component interface that declares the draw method. Both Circle and Rectangle implement this interface.
+Circle and Rectangle: These are leaf classes that implement the Shape interface and provide specific implementations for the draw method.
+CompositeShape: This class implements the Shape interface and can contain a list of Shape objects, including both leaves and other composites. The draw method iterates over the list and calls draw on each contained Shape.
+In the client code, you create individual shapes and a composite shape, add the individual shapes to the composite, and then call draw on the composite. The composite handles drawing its contained shapes uniformly.
+
+This example demonstrates how you can use the Composite Pattern to manage and work with complex tree structures while treating both simple and composite objects uniformly.

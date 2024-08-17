@@ -1,0 +1,88 @@
+The Bridge Pattern is a structural design pattern that decouples an abstraction from its implementation so that the two can vary independently. It helps in situations where you need to switch between different implementations without changing the client code.
+
+Simple Example: Shape and Color
+Imagine you are working with different shapes (e.g., Circle, Square) and each shape can be colored differently (e.g., Red, Blue). Instead of creating separate classes for every combination of shape and color (e.g., RedCircle, BlueSquare), the Bridge Pattern allows you to separate the concept of Shape from Color, making the code more flexible and easier to maintain.
+
+
+example->
+
+Step 1: Define the Color Interface (Implementor)
+
+// Implementor
+interface Color {
+    String applyColor();
+}
+Step 2: Create Concrete Implementors (Red, Blue)
+
+// Concrete Implementor
+class Red implements Color {
+    @Override
+    public String applyColor() {
+        return "Red";
+    }
+}
+
+class Blue implements Color {
+    @Override
+    public String applyColor() {
+        return "Blue";
+    }
+}
+Step 3: Define the Shape Abstract Class (Abstraction)
+
+// Abstraction
+abstract class Shape {
+    protected Color color;
+
+    public Shape(Color color) {
+        this.color = color;
+    }
+
+    abstract String draw();
+}
+Step 4: Create Concrete Shapes (Circle, Square)
+
+// Refined Abstraction
+class Circle extends Shape {
+
+    public Circle(Color color) {
+        super(color);
+    }
+
+    @Override
+    String draw() {
+        return "Circle drawn with " + color.applyColor() + " color";
+    }
+}
+
+class Square extends Shape {
+
+    public Square(Color color) {
+        super(color);
+    }
+
+    @Override
+    String draw() {
+        return "Square drawn with " + color.applyColor() + " color";
+    }
+}
+Step 5: Use the Client Code to Draw Shapes with Different Colors
+
+public class BridgePatternExample {
+
+    public static void main(String[] args) {
+        Color red = new Red();
+        Color blue = new Blue();
+
+        Shape redCircle = new Circle(red);
+        Shape blueSquare = new Square(blue);
+
+        System.out.println(redCircle.draw()); // Output: Circle drawn with Red color
+        System.out.println(blueSquare.draw()); // Output: Square drawn with Blue color
+    }
+}
+Explanation:
+Implementor (Color): The Color interface provides the applyColor method, which is implemented by Red and Blue.
+Concrete Implementor (Red, Blue): These classes provide specific implementations of the applyColor method.
+Abstraction (Shape): The Shape class holds a reference to a Color object and defines an abstract draw method.
+Refined Abstraction (Circle, Square): These classes extend the Shape class and provide specific implementations of the draw method.

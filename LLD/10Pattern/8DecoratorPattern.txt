@@ -1,0 +1,107 @@
+The Decorator Design Pattern allows you to add behavior to an object dynamically without affecting the behavior of other objects from the same class. It’s like "decorating" the object with additional features.
+
+Concept
+Imagine you have a simple cake. You can eat it just like that, but if you want to make it more special, you can add toppings like icing, cherries, or chocolate. Each topping adds something extra to the cake without changing the cake itself.
+
+Similarly, in programming, the decorator pattern allows you to "wrap" an object with additional functionality.
+
+
+1. Component Interface (Cake)
+First, we'll create a Cake interface that will be implemented by the basic cake and all decorators.
+
+interface Cake {
+    String getDescription();
+    double getCost();
+}
+2. Concrete Component (Simple Cake)
+Next, we'll create a SimpleCake class that implements the Cake interface.
+
+class SimpleCake implements Cake {
+    @Override
+    public String getDescription() {
+        return "Simple cake";
+    }
+
+    @Override
+    public double getCost() {
+        return 5.00;
+    }
+}
+3. Decorator Abstract Class
+Now, we'll create an abstract CakeDecorator class that also implements the Cake interface. This class will be the base for all specific decorators (toppings).
+
+
+abstract class CakeDecorator implements Cake {
+    protected Cake cake;
+
+    public CakeDecorator(Cake cake) {
+        this.cake = cake;
+    }
+
+    @Override
+    public String getDescription() {
+        return cake.getDescription();
+    }
+
+    @Override
+    public double getCost() {
+        return cake.getCost();
+    }
+}
+4. Concrete Decorators (Toppings)
+Let's create specific decorators that add chocolate and cherries to the cake.
+
+
+class ChocolateDecorator extends CakeDecorator {
+    public ChocolateDecorator(Cake cake) {
+        super(cake);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " with chocolate";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 1.50;
+    }
+}
+
+class CherryDecorator extends CakeDecorator {
+    public CherryDecorator(Cake cake) {
+        super(cake);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " with cherries";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 2.00;
+    }
+}
+5. Using the Decorators
+Now, we can create a simple cake and decorate it with chocolate and cherries.
+
+
+public class DecoratorPatternDemo {
+    public static void main(String[] args) {
+        // Start with a simple cake
+        Cake cake = new SimpleCake();
+        System.out.println(cake.getDescription());  // Output: Simple cake
+        System.out.println(cake.getCost());         // Output: 5.00
+
+        // Add chocolate to the cake
+        Cake chocolateCake = new ChocolateDecorator(cake);
+        System.out.println(chocolateCake.getDescription());  // Output: Simple cake with chocolate
+        System.out.println(chocolateCake.getCost());         // Output: 6.50
+
+        // Add cherries to the chocolate cake
+        Cake cherryChocolateCake = new CherryDecorator(chocolateCake);
+        System.out.println(cherryChocolateCake.getDescription());  // Output: Simple cake with chocolate with cherries
+        System.out.println(cherryChocolateCake.getCost());         // Output: 8.50
+    }
+}

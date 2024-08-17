@@ -1,0 +1,120 @@
+The Adapter Design Pattern is used to enable two incompatible interfaces to work together. It acts as a bridge between two incompatible interfaces, allowing objects of one type to be used where a different type is expected.
+
+Concept
+Imagine you have a phone charger that only accepts USB-C cables, but your phone uses a micro-USB cable. To make the charger compatible with your phone, you would use a USB-C to micro-USB adapter. The adapter allows the charger (USB-C) to work with the phone (micro-USB), even though they have different interfaces.
+
+Java Example
+Let's say you have an existing media player system that plays MP3 files, but now you need to integrate a new media player that can play MP4 and VLC files. However, the new media player has a different interface.
+
+1. Existing Interface (MediaPlayer)
+
+interface MediaPlayer {
+    void play(String audioType, String fileName);
+}
+2. Concrete Implementation of MediaPlayer (AudioPlayer)
+
+class AudioPlayer implements MediaPlayer {
+    @Override
+    public void play(String audioType, String fileName) {
+        if(audioType.equalsIgnoreCase("mp3")) {
+            System.out.println("Playing mp3 file. Name: " + fileName);
+        } else {
+            System.out.println("Invalid media. " + audioType + " format not supported");
+        }
+    }
+}
+3. New Interface (AdvancedMediaPlayer)
+
+interface AdvancedMediaPlayer {
+    void playVlc(String fileName);
+    void playMp4(String fileName);
+}
+4. Concrete Implementations of AdvancedMediaPlayer
+
+class VlcPlayer implements AdvancedMediaPlayer {
+    @Override
+    public void playVlc(String fileName) {
+        System.out.println("Playing vlc file. Name: " + fileName);
+    }
+
+    @Override
+    public void playMp4(String fileName) {
+        // Do nothing
+    }
+}
+
+class Mp4Player implements AdvancedMediaPlayer {
+    @Override
+    public void playVlc(String fileName) {
+        // Do nothing
+    }
+
+    @Override
+    public void playMp4(String fileName) {
+        System.out.println("Playing mp4 file. Name: " + fileName);
+    }
+}
+5. Adapter Class
+The adapter makes the AdvancedMediaPlayer compatible with MediaPlayer.
+
+
+class MediaAdapter implements MediaPlayer {
+    AdvancedMediaPlayer advancedMusicPlayer;
+
+    public MediaAdapter(String audioType) {
+        if(audioType.equalsIgnoreCase("vlc")) {
+            advancedMusicPlayer = new VlcPlayer();            
+        } else if(audioType.equalsIgnoreCase("mp4")) {
+            advancedMusicPlayer = new Mp4Player();
+        }
+    }
+
+    @Override
+    public void play(String audioType, String fileName) {
+        if(audioType.equalsIgnoreCase("vlc")) {
+            advancedMusicPlayer.playVlc(fileName);
+        } else if(audioType.equalsIgnoreCase("mp4")) {
+            advancedMusicPlayer.playMp4(fileName);
+        }
+    }
+}
+6. Using the Adapter in the AudioPlayer
+Now, we modify the AudioPlayer class to use the MediaAdapter for unsupported formats.
+
+class AudioPlayer implements MediaPlayer {
+    MediaAdapter mediaAdapter;
+
+    @Override
+    public void play(String audioType, String fileName) {
+        // Playing mp3 files directly
+        if(audioType.equalsIgnoreCase("mp3")) {
+            System.out.println("Playing mp3 file. Name: " + fileName);
+        } 
+        // MediaAdapter is providing support to play other file formats
+        else if(audioType.equalsIgnoreCase("vlc") || audioType.equalsIgnoreCase("mp4")) {
+            mediaAdapter = new MediaAdapter(audioType);
+            mediaAdapter.play(audioType, fileName);
+        } 
+        else {
+            System.out.println("Invalid media. " + audioType + " format not supported");
+        }
+    }
+}
+7. Client Code
+Finally, let's see how the AudioPlayer is used.
+
+public class AdapterPatternDemo {
+    public static void main(String[] args) {
+        AudioPlayer audioPlayer = new AudioPlayer();
+
+        audioPlayer.play("mp3", "song.mp3");
+        audioPlayer.play("mp4", "movie.mp4");
+        audioPlayer.play("vlc", "video.vlc");
+        audioPlayer.play("avi", "myMovie.avi");
+    }
+}
+Output
+Playing mp3 file. Name: song.mp3
+Playing mp4 file. Name: movie.mp4
+Playing vlc file. Name: video.vlc
+Invalid media. avi format not supported

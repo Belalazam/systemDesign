@@ -1,0 +1,89 @@
+The Abstract Design Pattern is a behavioral design pattern that allows you to define a template for a set of related or dependent objects without specifying their concrete classes. It helps in creating a framework where you can define operations but defer the implementation details to subclasses.
+
+Here’s a simple example to illustrate the Abstract Design Pattern in Java:
+
+Example: Coffee Preparation
+Imagine you're designing a coffee-making process where different types of coffee are prepared, but the overall process is the same for all types. You want to define a common structure for preparing coffee but allow each type of coffee to implement specific steps in the preparation.
+
+1. Define an Abstract Class
+Create an abstract class Coffee that defines the steps for making coffee but leaves some steps to be implemented by subclasses.
+
+
+abstract class Coffee {
+    
+    // Template method
+    public final void prepareCoffee() {
+        boilWater();
+        brewCoffeeGrinds();
+        pourInCup();
+        addCondiments();
+    }
+
+    protected abstract void brewCoffeeGrinds();
+    protected abstract void addCondiments();
+
+    private void boilWater() {
+        System.out.println("Boiling water");
+    }
+
+    private void pourInCup() {
+        System.out.println("Pouring coffee into cup");
+    }
+}
+2. Create Concrete Classes
+Implement specific types of coffee by extending the abstract class and providing implementations for the abstract methods.
+
+
+class CoffeeWithHook extends Coffee {
+
+    @Override
+    protected void brewCoffeeGrinds() {
+        System.out.println("Dripping coffee through filter");
+    }
+
+    @Override
+    protected void addCondiments() {
+        System.out.println("Adding sugar and milk");
+    }
+}
+
+class TeaWithHook extends Coffee {
+
+    @Override
+    protected void brewCoffeeGrinds() {
+        System.out.println("Steeping the tea");
+    }
+
+    @Override
+    protected void addCondiments() {
+        System.out.println("Adding lemon");
+    }
+}
+3. Use the Classes
+Create instances of the concrete classes and use them.
+
+
+public class Main {
+    public static void main(String[] args) {
+        Coffee coffee = new CoffeeWithHook();
+        coffee.prepareCoffee();
+
+        System.out.println();
+
+        Coffee tea = new TeaWithHook();
+        tea.prepareCoffee();
+    }
+}
+Explanation
+Abstract Class Coffee: This class defines the template method prepareCoffee() which outlines the steps for preparing coffee. The boilWater() and pourInCup() methods are implemented in the abstract class because these steps are common for all types of coffee.
+
+Concrete Classes (CoffeeWithHook and TeaWithHook): These classes provide the specific implementations for the steps that vary between types of coffee.
+
+By using the Abstract Design Pattern, you ensure that the overall process remains consistent while allowing flexibility in the specific steps involved.
+
+
+
+
+
+
+
