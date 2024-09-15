@@ -1,0 +1,162 @@
+kubernetes -> container orchestration (co-ordinating and managing multiple services, application or tasks to achieve a desired outcome) tool
+
+advantages ->
+minimal to no downtime
+scalibility or high performance
+disaster recovery - backup and restore
+
+Node -> simple server or a virtual machine
+
+Pod  -> smalles units of k8 and abstraction over container, usually 1 application per pods, each pod gets its own ip address
+
+service -> permanent ip address, lifecycle of pods and service are not connected
+
+Ingres -> mapped ip + port to a domain name, so first request comes to ingress , and then it forwarded it  to service
+
+configMap -> external configuration of application
+secret -> same as config map, but put credentials in base 64 formats
+
+	let say we have a endpoint to denote some application, but because of some issue now you want to change it
+	but changing it require to redeploy your app, because you pull all cofiguration in yourapp, to overcome this
+	problem, we put settings into configMap of k8s
+
+
+volumes -> Adds a storage to cluster, if pod crashes data are still persisted
+
+Deployments -> buleprint for pods, abstraction on top of pods
+
+StatefulSet -> it is designed for applications that require stable, persistent storage, such as databases. It ensures that each pod in the StatefulSet has a unique, stable identity (hostname) and consistent, persistent storage across pod restarts
+
+Kublets ->
+	kublet interact with both, the container and node
+	kublet starts the pod with a container inside
+
+Kube proxy -> forwards the requests
+
+container runtime ->  The container runtime is the underlying software that actually runs the containers. Kubernetes uses this runtime to manage containers on each node.
+
+3 Node processes on worker Node ->>
+	1) kublet
+	2) kube proxy
+	3) container runtime
+
+
+Master Node ->
+	processes of Master Node ->
+		Api Server -> query made to cluster
+
+		Schedulers -> where to create new pod, based on resouce available
+
+		controller Manager -> manages different controllers to handle various tasks, including reschedulin
+                failed  pods, managing jobs, and ensuring replicas  
+
+		etcd -> is a distributed key-value store that serves as the backbone (brain) of the cluster. 
+         	stores all the cluster data, including information about the state of pods, nodes, services, and more
+
+
+Minikube ->
+	creaete virtual box on your laptop
+	node runs in that virtual box
+	1 node k8s cluster
+	for testing purpose
+	worker and master process on same node
+
+kubectls -> 
+	a cli tool to manage k8s cluster
+
+Layers of Abstraction------->
+	-> deployment manages a replica set
+	-> replicaset manages pods
+	-> pod is an abstraction of container
+	-> continer
+
+ReplicaSet -> it is a Kubernetes resource that ensures a specified number of pod replicas are running at any given time. It maintains the desired number of pod instances, replacing any that fail or are deleted. ReplicaSets are typically used to ensure high availability and scaling of applications by distributing load across multiple instances of the same pod.
+
+
+kubernets has two type of config file
+
+
+
+1. service -------->
+
+A Service in Kubernetes is an abstraction that defines a logical set of pods and a policy for accessing them. It provides a stable endpoint (IP address and port) for a set of pods, even as individual pods come and go due to scaling, updates, or failures. Services ensure that traffic is reliably routed to the correct pods.
+
+Types of Services:
+ClusterIP (default): Exposes the service only within the cluster.
+NodePort: Exposes the service on a static port on each node of the cluster.
+LoadBalancer: Exposes the service externally via a cloud provider’s load balancer.
+ExternalName: Maps the service to a DNS name external to the cluster.
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+
+
+
+2. Deployment ------------------------->
+
+A Deployment is a Kubernetes resource that manages ReplicaSets and provides declarative updates to your application. It ensures that a specified number of pod replicas are running and enables you to perform rolling updates, rollbacks, and scaling.
+
+Deployments make it easy to manage and update applications without downtime, and they support versioning of applications.
+
+Features of a Deployment:
+Rolling Updates: Gradually replaces old versions of pods with new ones.
+Rollback: Easily revert to a previous version of an application in case of issues.
+Scaling: Increase or decrease the number of pod replicas.
+Self-Healing: Automatically replaces failed pods.
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: my-app-image:v1
+        ports:
+        - containerPort: 8080
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+

@@ -1,0 +1,60 @@
+source < (kubectl completion bash)
+	-> auto complete enables in kubectl
+
+
+kubectl create deployment <deployment name> --image=<image name>
+	-> most basic config deployment
+
+kubectl get deployment
+	-> get list of all deployments
+
+kubectl get pod
+	-> get list of all pods
+
+kubectl edit deployment <deployment name>
+	-> edit deployment file
+
+kubectl logs <pod name>
+	-> gives logs of pod name
+
+kubectl describe pod <pod name>
+	-> get pod description
+
+kubectl exec -it <pod name> -- bin/bash
+	-> connects the application terminal
+
+kubectl delete deployment <deployment name>
+	-> delete the pod
+
+
+kubectl apply f <file-name.yml>
+	-> execute config file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

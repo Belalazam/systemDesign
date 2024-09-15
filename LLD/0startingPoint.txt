@@ -7,11 +7,11 @@ so lets build a company
 1st of all, we need vision for our company
 
 vision -> In India we have so many beggars, And watching them is so much disheartening. and every capable indian want
-to help them, but problem is we dont know whom to help and whom to not, cause many beggar will user donated money
+to help them, but problem is we dont know whom to help and whom to not, cause many beggar will use donated money
 as wrong way like gambling drunking etc, but there are also many beggars who really want to change, and they need
 a little push , so for detecting those type of beggar will be our mission 
 
-nameOfTheCompany -> helpingTruth
+nameOfTheCompany -> helpingHand
 
 motto -> help those , who want to help themselve
 
